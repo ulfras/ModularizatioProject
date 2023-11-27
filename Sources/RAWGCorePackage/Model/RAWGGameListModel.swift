@@ -6,15 +6,15 @@
 //
 
 public struct RAWGGameListModel: Codable {
-    let results: [RAWGGameListResult]
+    public let results: [RAWGGameListResult]
 }
 
 public struct RAWGGameListResult: Codable {
-    let id: Int
-    let name: String
-    let released: String
-    let backgroundImage: String
-    let rating: Double
+    public let id: Int
+    public let name: String
+    public let released: String
+    public let backgroundImage: String
+    public let rating: Double
 
     enum CodingKeys: String, CodingKey {
         case id, name, released

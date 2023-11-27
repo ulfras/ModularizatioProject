@@ -6,17 +6,17 @@
 //
 
 public struct RAWGGameDetailModel: Codable {
-    var id: Int
-    var name: String
-    var released: String
-    var backgroundImage: String
-    var website: String
-    var rating: Double
-    var publishers: [PublisherName]
-    var developers: [GameDeveloper]
-    var esrbRating: EsrbRating
-    var descriptionRaw: String
-    var isFavorite: Bool?
+    public var id: Int
+    public var name: String
+    public var released: String
+    public var backgroundImage: String
+    public var website: String
+    public var rating: Double
+    public var publishers: [PublisherName]
+    public var developers: [GameDeveloper]
+    public var esrbRating: EsrbRating
+    public var descriptionRaw: String
+    public var isFavorite: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -33,13 +33,13 @@ public struct RAWGGameDetailModel: Codable {
 }
 
 public struct PublisherName: Codable {
-    var name: String
+    public var name: String
 }
 
 public struct GameDeveloper: Codable {
-    var name: String
+    public var name: String
 }
 
 public struct EsrbRating: Codable {
-    var name: String
+    public var name: String
 }
