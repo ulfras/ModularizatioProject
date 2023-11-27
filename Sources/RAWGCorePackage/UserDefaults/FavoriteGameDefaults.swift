@@ -9,14 +9,14 @@ import Foundation
 
 public struct FavoriteGameDefaults {
 
-    static let userDefaultsKey = "FavoriteGameDefaults"
-    static let userDefaults = UserDefaults.standard
+    public static let userDefaultsKey = "FavoriteGameDefaults"
+    public static let userDefaults = UserDefaults.standard
 
-    static func save(_ value: [RAWGGameDetailModel]) {
+    public static func save(_ value: [RAWGGameDetailModel]) {
         userDefaults.set(try? PropertyListEncoder().encode(value), forKey: userDefaultsKey)
     }
 
-    static func get() -> [RAWGGameDetailModel] {
+    public static func get() -> [RAWGGameDetailModel] {
         var favoriteGameList: [RAWGGameDetailModel]!
         if let data = userDefaults.value(forKey: userDefaultsKey) as? Data {
             favoriteGameList = try? PropertyListDecoder().decode([RAWGGameDetailModel].self, from: data)
@@ -26,11 +26,11 @@ public struct FavoriteGameDefaults {
         }
     }
 
-    static func check() -> Bool {
+    public static func check() -> Bool {
         return userDefaults.object(forKey: userDefaultsKey) != nil
     }
 
-    static func delete() {
+    public static func delete() {
         userDefaults.removeObject(forKey: userDefaultsKey)
     }
 }

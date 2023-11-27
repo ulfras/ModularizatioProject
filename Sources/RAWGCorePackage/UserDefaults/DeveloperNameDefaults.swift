@@ -8,18 +8,18 @@
 import Foundation
 
 public struct DeveloperNameDefaults {
-    static let devNameDefaultsKey = "DeveloperNameDefaults"
-    static let userDefaults = UserDefaults.standard
+    public static let devNameDefaultsKey = "DeveloperNameDefaults"
+    public static let userDefaults = UserDefaults.standard
 
-    static func save(_ value: String) {
+    public static func save(_ value: String) {
         userDefaults.set(value, forKey: devNameDefaultsKey)
     }
 
-    static func get() -> String {
+    public static func get() -> String {
         return userDefaults.string(forKey: devNameDefaultsKey)!
     }
 
-    static func check() -> Bool {
+    public static func check() -> Bool {
         return userDefaults.object(forKey: devNameDefaultsKey) != nil
     }
 }
