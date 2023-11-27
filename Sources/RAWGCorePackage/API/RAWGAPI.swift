@@ -21,6 +21,8 @@ public protocol RAWGAPIDataSourceProtocol {
 
 public class RAWGAPIDataSource: RAWGAPIDataSourceProtocol {
     
+    public init() { }
+    
     public func getGameListRx(apiKey: String) -> Observable<RAWGGameListModel> {
         return Observable<RAWGGameListModel>.create { observer in
             let gameListURL = "https://api.rawg.io/api/games?page_size=50&key=\(apiKey)"
