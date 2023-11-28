@@ -8,7 +8,7 @@
 import RealmSwift
 
 public class RealmRAWGGameDetailModel: Object {
-    @Persisted var id: Int
+    @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String
     @Persisted var released: String
     @Persisted var backgroundImage: String
