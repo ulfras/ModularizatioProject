@@ -30,7 +30,7 @@ public class RealmRAWGGameDetailModel: Object {
         rating = model.rating
         publishers.append(objectsIn: model.publishers.map(RealmPublisherName.init))
         developers.append(objectsIn: model.developers.map(RealmGameDeveloper.init))
-        esrbRating = RealmEsrbRating(value: model.esrbRating)
+        esrbRating = RealmEsrbRating(from: model.esrbRating)
         descriptionRaw = model.descriptionRaw
         isFavorite = model.isFavorite
     }
@@ -56,5 +56,9 @@ public class RealmGameDeveloper: Object {
 
 public class RealmEsrbRating: Object {
     @Persisted var name: String
-    let gameDetailModel = LinkingObjects(fromType: RealmRAWGGameDetailModel.self, property: "esrbRating")
+
+    convenience init(from model: EsrbRating) {
+        self.init()
+        name = model.name
+    }
 }
