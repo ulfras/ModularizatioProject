@@ -7,17 +7,8 @@
 
 import RealmSwift
 
-public class RealmRAWGGameListModel: Object {
-    @Persisted var results: List<RealmRAWGGameListResult> = List<RealmRAWGGameListResult>()
-
-    convenience init(from model: RAWGGameListModel) {
-        self.init()
-        results.append(objectsIn: model.results.map(RealmRAWGGameListResult.init))
-    }
-}
-
 public class RealmRAWGGameListResult: Object {
-    @Persisted var id: Int
+    @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String
     @Persisted var released: String
     @Persisted var backgroundImage: String
@@ -32,4 +23,3 @@ public class RealmRAWGGameListResult: Object {
         rating = result.rating
     }
 }
-
