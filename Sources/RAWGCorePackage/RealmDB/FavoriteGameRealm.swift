@@ -13,7 +13,13 @@ public struct FavoriteGameRealm {
 
     public static func save(_ value: [RAWGGameDetailModel]) {
         try! realm.write {
-            realm.add(value.map(RealmRAWGGameDetailModel.init))
+            for gameDetailModel in value {
+                if let existingGame = realm.object(ofType: RealmRAWGGameDetailModel.self, forPrimaryKey: gameDetailModel.id) {
+                    realm.delete(existingGame)
+                } else {
+                    realm.add(RealmRAWGGameDetailModel(from: gameDetailModel))
+                }
+            }
         }
     }
 
