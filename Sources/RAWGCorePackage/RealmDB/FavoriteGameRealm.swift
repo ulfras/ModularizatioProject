@@ -21,6 +21,11 @@ public struct FavoriteGameRealm {
         let realmResults = realm.objects(RealmRAWGGameDetailModel.self)
         
         let mappedResults: [RAWGGameDetailModel] = realmResults.compactMap { realmResult in
+            guard let esrbRating = realmResult.esrbRating else {
+                // Handle the case where esrbRating is nil
+                return nil
+            }
+
             return RAWGGameDetailModel(
                 id: realmResult.id,
                 name: realmResult.name,
@@ -34,7 +39,7 @@ public struct FavoriteGameRealm {
                 developers: realmResult.developers.map { RealmGameDeveloper in
                     return GameDeveloper(name: RealmGameDeveloper.name)
                 },
-                esrbRating: EsrbRating(name: realmResult.esrbRating.name),
+                esrbRating: EsrbRating(name: esrbRating.name),
                 descriptionRaw: realmResult.descriptionRaw,
                 isFavorite: realmResult.isFavorite
             )

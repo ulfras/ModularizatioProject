@@ -16,7 +16,7 @@ public class RealmRAWGGameDetailModel: Object {
     @Persisted var rating: Double
     @Persisted var publishers: List<RealmPublisherName>
     @Persisted var developers: List<RealmGameDeveloper>
-    @Persisted var esrbRating: RealmEsrbRating
+    @Persisted var esrbRating: RealmEsrbRating?
     @Persisted var descriptionRaw: String
     @Persisted var isFavorite: Bool?
 
