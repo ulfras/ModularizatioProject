@@ -43,7 +43,6 @@ public struct FavoriteGameRealm {
         return mappedResults
     }
 
-
     public static func check() -> Bool {
         return !realm.objects(RealmRAWGGameDetailModel.self).isEmpty
     }
