@@ -7,11 +7,25 @@
 
 import RealmSwift
 
-public struct FavoriteGameRealm {
+public protocol FavoriteGameRealmDataSource {
+    
+    func save(_ gameDetailModel: RAWGGameDetailModel)
+    
+    func get() -> [RAWGGameDetailModel]
+    
+    func check() -> Bool
+    
+    func delete()
+}
 
-    public static let realm = try! Realm()
 
-    public static func save(_ gameDetailModel: RAWGGameDetailModel) {
+public class FavoriteGameRealm: FavoriteGameRealmDataSource {
+    
+    public let realm = try! Realm()
+    
+    public init() { }
+    
+    public func save(_ gameDetailModel: RAWGGameDetailModel) {
         try! realm.write {
             if gameDetailModel.isFavorite ?? false {
                 realm.add(RealmRAWGGameDetailModel(from: gameDetailModel), update: .modified)
@@ -23,7 +37,7 @@ public struct FavoriteGameRealm {
         }
     }
 
-    public static func get() -> [RAWGGameDetailModel] {
+    public func get() -> [RAWGGameDetailModel] {
         let realmResults = realm.objects(RealmRAWGGameDetailModel.self)
         
         let mappedResults: [RAWGGameDetailModel] = realmResults.compactMap { realmResult in
@@ -54,11 +68,11 @@ public struct FavoriteGameRealm {
         return mappedResults
     }
 
-    public static func check() -> Bool {
+    public func check() -> Bool {
         return !realm.objects(RealmRAWGGameDetailModel.self).isEmpty
     }
 
-    public static func delete() {
+    public func delete() {
         try! realm.write {
             realm.delete(realm.objects(RealmRAWGGameDetailModel.self))
         }

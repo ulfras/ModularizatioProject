@@ -7,17 +7,30 @@
 
 import RealmSwift
 
-public struct GameListRealm {
+public protocol GameListRealmDataSource {
+    
+    func save(_ value: RAWGGameListModel)
+    
+    func get() -> RAWGGameListModel?
+    
+    func check() -> Bool
+    
+    func delete()
+}
 
-    public static let realm = try! Realm()
+public class GameListRealm: GameListRealmDataSource {
+    
+    public let realm = try! Realm()
+    
+    public init() { }
 
-    public static func save(_ value: RAWGGameListModel) {
+    public func save(_ value: RAWGGameListModel) {
         try! realm.write {
             realm.add(RealmRAWGGameListModel(from: value))
         }
     }
 
-    public static func get() -> RAWGGameListModel? {
+    public func get() -> RAWGGameListModel? {
         let realmResults = realm.objects(RealmRAWGGameListModel.self)
         
         guard let firstResult = realmResults.first else { return nil }
@@ -35,14 +48,13 @@ public struct GameListRealm {
         return RAWGGameListModel(results: mappedResults)
     }
 
-    public static func check() -> Bool {
+    public func check() -> Bool {
         return !realm.objects(RealmRAWGGameListModel.self).isEmpty
     }
 
-    public static func delete() {
+    public func delete() {
         try! realm.write {
             realm.delete(realm.objects(RealmRAWGGameListModel.self))
         }
     }
 }
-
